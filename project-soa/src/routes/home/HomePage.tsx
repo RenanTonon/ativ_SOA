@@ -1,17 +1,55 @@
-export const HomePage = () => {
-  //https://servicodados.ibge.gov.br/api/v2/censos/nomes/{nome}
+import React from "react";
+import { Bar } from "react-chartjs-2";
+import { Chart as ChartJS, CategoryScale, LinearScale, BarElement } from "chart.js";
 
-  //https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking
-  
-  
-    var api = fetch('https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking')
-    var response = `${api}`
- 
+// Registrando os módulos necessários
+ChartJS.register(CategoryScale, LinearScale, BarElement);
+
+// Dados de exemplo
+const arrNomesFrequentes = [
+  { nome: "Renan", frequencia: 100 },
+  { nome: "Lucas", frequencia: 120 },
+  { nome: "Willian", frequencia: 150 },
+];
+
+// Dados formatados para o gráfico
+const data = {
+  datasets: [
+    {
+      label: "Evolução do ranking de Nomes",
+      data: arrNomesFrequentes,
+      backgroundColor: "rgba(75,192,192,0.6)",
+      parsing: {
+        xAxisKey: "nome",
+        yAxisKey: "frequencia",
+      },
+    },
+  ],
+};
+
+// Opções do gráfico
+const chartOptions = {
+  scales: {
+    x: {
+      type: "category" as const, // Correção aqui!
+    },
+    y: {
+      beginAtZero: true,
+    },
+  },
+};
+
+export const HomePage = () => {
   return (
     <div>
-      ´${response}´
+      <div>
+
+      </div>
+      <div className="w-[500px]">
+        <Bar data={data} options={chartOptions} />
+      </div>
     </div>
-  )
+  );
+};
 
-}
-
+export default HomePage;
