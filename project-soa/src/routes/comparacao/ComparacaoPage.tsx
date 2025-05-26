@@ -1,53 +1,77 @@
-import React from "react";
-import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement } from "chart.js";
+import React, { useEffect, useState } from "react";
+import { Line } from "react-chartjs-2";
+import { Chart as ChartJS,CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend} from "chart.js";
+import InputText from "../../components/inputs/InputText";
+import NavigateButton from "../../components/buttons/NavigateButton";
+import { ApiComparacao } from "../../api/ApiComparacao";
 
-// Registrando os módulos necessários
-ChartJS.register(CategoryScale, LinearScale, BarElement);
-
-// Dados de exemplo
-const arrNomesFrequentes = [
-  { nome: "Renan", frequencia: 100 },
-  { nome: "Lucas", frequencia: 120 },
-  { nome: "Willian", frequencia: 150 },
-];
-
-// Dados formatados para o gráfico
-const data = {
-  datasets: [
-    {
-      label: "Evolução do ranking de Nomes",
-      data: arrNomesFrequentes,
-      backgroundColor: "rgba(75,192,192,0.6)",
-      parsing: {
-        xAxisKey: "nome",
-        yAxisKey: "frequencia",
-      },
-    },
-  ],
-};
+// Registrar os módulos necessários
+ChartJS.register(CategoryScale,LinearScale,PointElement,LineElement,Title,Tooltip,Legend);
 
 // Opções do gráfico
 const chartOptions = {
-  scales: {
-    x: {
-      type: "category" as const, // Correção aqui!
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'top' as const,
     },
-    y: {
-      beginAtZero: true,
+    title: {
+      display: true,
+      text: 'Comparação de dois nomes ao longo do tempo (nacional)',
     },
   },
 };
 
 export const ComparacaoPage = () => {
-  return (
-    <div>
-      <div>
+  const [nome, setNome] = useState("");
+  const [nome2, setNome2] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [data, setData] = useState<any>({
+    labels: [],
+    datasets: [],
+  });
 
+  const comparadorDeNomes = async (nome: string, nome2: string) => {
+    try {
+      const api = await ApiComparacao(nome, nome2);
+
+      const labels = api.map((item: any) => item.decada);
+
+      setData({
+        labels,
+        datasets: [
+          {
+            label: nome,
+            data: api.map((item: any) => item.frequencia),
+            borderColor: 'rgba(54, 162, 235, 1)',
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+          },
+          {
+            label: nome2,
+            data: api.map((item: any) => item.frequencia2),
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          },
+        ],
+      });
+    } catch (error) {
+      setError("Erro ao buscar dados da API.");
+      console.error(error);
+    }
+  };
+
+  return (
+    <div className="flex flex-col w-screen h-screen items-center justify-center content-center">
+      <div className="flex items-center gap-4">
+        <InputText nameLabel="Nome 1" placeholder="Digite o primeiro nome" value={nome} onChange={(e) => setNome(e.target.value)} />
+        <InputText nameLabel="Nome 2" placeholder="Digite o segundo nome" value={nome2} onChange={(e) => setNome2(e.target.value)} />
+        <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={() => comparadorDeNomes(nome, nome2)}>Carregar</button>
       </div>
-      <div className="w-[500px]">
-        <Bar data={data} options={chartOptions} />
+
+      <div className="w-full max-w-[600px] mt-6 px-4">
+        <Line data={data} options={chartOptions} />
       </div>
+      <NavigateButton path="/home" conteudo="Voltar" />
     </div>
   );
 };
