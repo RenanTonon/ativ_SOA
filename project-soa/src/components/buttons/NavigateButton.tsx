@@ -15,7 +15,7 @@ const NavigateButton = (props:Props) => {
     };
   
   return (
-    <button onClick={setNavigate} className="bg-blue-600 p-2 rounded-[10px] text-white w-[100px]">{props.conteudo}</button>
+    <button onClick={setNavigate} className=" flex bg-blue-600 p-2 rounded-[10px] text-white w-[200px] h-[40px]  items-center justify-center content-center hover:bg-black hover:text-white duration-300 font-mono">{props.conteudo}</button>
   )
 
 }

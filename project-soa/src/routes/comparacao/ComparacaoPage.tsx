@@ -61,11 +61,15 @@ export const ComparacaoPage = () => {
   };
 
   return (
-    <div className="flex flex-col w-screen h-screen items-center justify-center content-center">
-      <div className="flex items-center gap-4">
+    <div className="flex flex-col w-screen h-screen items-center justify-center content-center gap-3 mt-20">
+      <div className="flex flex-col items-center justify-center content-center w-[700px] text-center gap-3 border border-solid border-black p-10 rounded-[15px] bg-zinc-100 font-mono">
+        <h1>Compare nomes e veja quem fez mais sucesso!</h1>
+        <p>Digite dois nomes no campo abaixo e veja, em um gráfico comparativo, como a frequência de cada um evoluiu ao longo das décadas. Descubra qual nome foi mais popular em cada período e compare tendências de forma visual e interativa!</p>
+      </div>
+      <div className="flex items-center justify-center content-center w-[700px] text-center gap-3 border border-solid border-black p-10 rounded-[15px] bg-zinc-100 font-mono">
         <InputText nameLabel="Nome 1" placeholder="Digite o primeiro nome" value={nome} onChange={(e) => setNome(e.target.value)} />
         <InputText nameLabel="Nome 2" placeholder="Digite o segundo nome" value={nome2} onChange={(e) => setNome2(e.target.value)} />
-        <button className="bg-blue-500 text-white px-4 py-2 rounded" onClick={() => comparadorDeNomes(nome, nome2)}>Carregar</button>
+        <button className="flex bg-blue-600 p-2 rounded-[10px] text-white w-[200px] h-[40px]  items-center justify-center content-center hover:bg-black hover:text-white duration-300 font-mono" onClick={() => comparadorDeNomes(nome, nome2)}>Carregar</button>
       </div>
 
       <div className="w-full max-w-[600px] mt-6 px-4">

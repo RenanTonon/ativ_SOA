@@ -10,7 +10,7 @@ interface Props {
 const InputSelect = (props: Props) => {
   return (
     <div className="flex flex-col gap-[3px]">
-      <label htmlFor="meuSelect">{props.label}</label>
+      <label htmlFor="meuSelect" className="flex">{props.label}</label>
       <select id="meuSelect" value={props.value} onChange={props.onChange}>
         <option value="">--Selecione--</option>
         {props.opcoes.map((opcao, index) => (
