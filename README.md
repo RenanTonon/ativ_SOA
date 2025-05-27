@@ -1,3 +1,56 @@
+# Projeto Fullstack (backend + frontend)
+
+## Como rodar a aplicação
+
+1. Certifique-se de ter o Docker e o Docker Compose instalados.
+
+2. No terminal, na raiz do projeto (onde está o `docker-compose.yml`), rode:
+
+```bash
+docker compose up --build
+```
+
+3. Aguarde os containers buildarem e iniciarem.
+
+---
+
+## Acessando a aplicação
+
+- **Frontend:**  
+  Abra no navegador: [http://localhost:5173/home](http://localhost:5173/home)
+
+- **Backend:**  
+  A API estará disponível em: [http://localhost:3000](http://localhost:3000)
+
+---
+
+## Comandos úteis
+
+- Parar a aplicação:  
+  ```bash
+  docker compose down
+  ```
+
+- Rodar em modo detach (em background):  
+  ```bash
+  docker compose up --build -d
+  ```
+
+---
+
+## Observações
+
+- O modo de desenvolvimento está configurado com hot reload para backend (NestJS) e frontend (React + Vite).
+- Volumes estão configurados para refletir alterações locais instantaneamente dentro dos containers.
+
+
+
+
+
+
+
+--
+
 descobrir Evolução do ranking
 #GET - https://servicodados.ibge.gov.br/api/v2/censos/nomes/{nome}
 
