@@ -1,4 +1,5 @@
 version: "3.8"
+
 services:
   backend:
     build:
@@ -8,10 +9,10 @@ services:
       - "3000:3000"
     volumes:
       - ./backend:/app
-      - /app/node_modules
+    working_dir: /app
+    command: npm run start:dev
     environment:
       - NODE_ENV=development
-    command: npm run start:dev
 
   frontend:
     build:
@@ -22,6 +23,7 @@ services:
     volumes:
       - ./front-end:/app
       - /app/node_modules
+    working_dir: /app
+    command: npm run dev -- --host
     environment:
       - NODE_ENV=development
-    command: npm run dev
