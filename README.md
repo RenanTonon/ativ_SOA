@@ -1,4 +1,8 @@
 # Projeto SOA (backend + frontend)
+## Alunos  
+Renan Tonon de Oliveira ra: 22188153-2  
+Willian Hideaki Kakihata ra: 22015763-2  
+Lucas Niguti dos Santos ra: 22019975-2  
 
 ## Como rodar a aplicação
 
