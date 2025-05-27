@@ -6,7 +6,7 @@ type RespostaNomeItem = {
     sexo: string | null;
     localidade?: string;
     res: {
-        periodo: string; // Ex: "1930["
+        periodo: string;
         frequencia: number;
     }[];
 };
