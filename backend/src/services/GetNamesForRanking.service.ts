@@ -78,25 +78,6 @@ export class GetNamesForRankingService {
     }
   }
 
-  async getLocalForTopNames(): Promise<string> {
-    const response = await axios.get<LocalResposta>(`https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking`);
-    const dados = response.data;
-
-    dados.forEach(item => {
-      console.log(`Localidade: ${item.localidade}`);
-      item.res.forEach(nomeInfo => {
-        console.log(`Nome: ${nomeInfo.nome}, Frequência: ${nomeInfo.frequencia}, Ranking: ${nomeInfo.ranking}`);
-      });
-    });
-
-    return 'Hello World!';
-  }
-
-  async getMunicipiosPorEstado(estadoCodigo: number) {
-    const response = await axios.get(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estadoCodigo}/municipios`);
-    return response.data;
-  }
-
 
 
 
