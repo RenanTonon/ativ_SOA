@@ -1,4 +1,4 @@
-# Projeto Fullstack (backend + frontend)
+# Projeto SOA (backend + frontend)
 
 ## Como rodar a aplicação
 
