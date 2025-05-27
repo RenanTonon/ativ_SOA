@@ -35,8 +35,6 @@ export class GetNamesForRankingService {
     const response = await axios.get<NomeResposta[]>(`https://servicodados.ibge.gov.br/api/v2/censos/nomes/${nome}`);
     const dados = response.data[0];
 
-    this.bubbleSortPorPeriodo(dados);
-
     const resultadoFiltrado = dados.res.filter((item) => {
       const match = item.periodo.match(/\[(\d+),(\d+)\[/);
       if (!match) return false;
@@ -58,25 +56,6 @@ export class GetNamesForRankingService {
     };
   }
 
-  bubbleSortPorPeriodo(dados: NomeResposta) {
-    const arr = dados.res;
-
-    const extrairInicio = (periodo: string): number => {
-      const match = periodo.match(/\[(\d+),/);
-      return match ? parseInt(match[1], 10) : 0;
-    };
-
-    const n = arr.length;
-    for (let i = 0; i < n - 1; i++) {
-      for (let j = 0; j < n - i - 1; j++) {
-        if (extrairInicio(arr[j].periodo) > extrairInicio(arr[j + 1].periodo)) {
-          const temp = arr[j];
-          arr[j] = arr[j + 1];
-          arr[j + 1] = temp;
-        }
-      }
-    }
-  }
 
 
 
